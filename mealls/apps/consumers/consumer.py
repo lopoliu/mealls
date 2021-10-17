@@ -2,6 +2,9 @@ from channels.generic.websocket import WebsocketConsumer
 from channels.exceptions import StopConsumer
 from asgiref.sync import async_to_sync
 
+# 实现群聊功能
+# group为房间id
+
 
 class ChatConsumer(WebsocketConsumer):
     def websocket_connect(self, message):

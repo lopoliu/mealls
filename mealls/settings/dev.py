@@ -116,3 +116,13 @@ CHANNEL_LAYERS = {
         'CONFIG': {"hosts": ["redis://127.0.0.1:6379/2"], },
     },
 }
+
+
+
+# 邮箱配置
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '982781738@qq.com'  # 帐号
+EMAIL_HOST_PASSWORD = 'ylzgjnkvpwaibbcc'  # 密码
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
