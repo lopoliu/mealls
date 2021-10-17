@@ -3,7 +3,7 @@ from rest_framework.exceptions import ValidationError
 from .models import User
 
 
-class UserSerializer(serializers.Serializer):
+class RegisterSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=128, required=True)
     email = serializers.EmailField(required=True)
@@ -25,4 +25,28 @@ class UserSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         del validated_data['re_password']
-        return User.objects.create(**validated_data)
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
+class LoginSerializer(serializers.Serializer):
+    id = serializers.PrimaryKeyRelatedField(read_only=True)
+    email = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
+
+    def validate(self, attrs):
+        try:
+            user = User.objects.filter(email=attrs['email']).first()
+        except User.DoesNotExist:
+            raise ValidationError("用户不存在，请先注册")
+        if not user.check_password(attrs['password']):
+            raise ValidationError("用户名或密码错误，请重新输入")
+        return attrs
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass

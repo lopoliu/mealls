@@ -107,7 +107,7 @@ CACHES = {
 }
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ["mealls.components.authentication.LoginAuth"]
+    "DEFAULT_AUTHENTICATION_CLASSES": ["mealls.components.authentication.LoginAuth"],
 }
 
 CHANNEL_LAYERS = {

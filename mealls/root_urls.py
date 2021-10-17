@@ -1,10 +1,10 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from mealls.components.code import send_email_code
+from mealls.components.code import SendEmailCode
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
-    path('code/', send_email_code),
+    path('code/', SendEmailCode.as_view()),
 ]

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from random import randint
 from django_redis import get_redis_connection
 from celery_app.tasks import send_email
+from rest_framework.views import APIView
 
 redis_conn = get_redis_connection()
 
@@ -14,9 +15,11 @@ def create_code():
     return code
 
 
-@api_view(http_method_names=['GET'])
-def send_email_code(request):
-    code = create_code()
-    redis_conn.setex('email_code_%s' % request.query_params['email'], 60 * 5, code)
-    send_email.delay(request.query_params.get('email'), code)
-    return Response({'status': code})
+class SendEmailCode(APIView):
+    authentication_classes = []
+
+    def get(self, request):
+        code = create_code()
+        redis_conn.setex('email_code_%s' % request.query_params['email'], 60 * 5, code)
+        send_email.delay(request.query_params.get('email'), code)
+        return Response({'status': code})
