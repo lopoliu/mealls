@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'channels',
     'user',
     'book',
 
@@ -52,6 +53,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mealls.wsgi.application'
+ASGI_APPLICATION = 'mealls.asgi.application'
 
 DATABASES = {
     'default': {
@@ -106,4 +108,11 @@ CACHES = {
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ["mealls.components.authentication.LoginAuth"]
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {"hosts": ["redis://127.0.0.1:6379/2"], },
+    },
 }
