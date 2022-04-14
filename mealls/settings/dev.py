@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'channels',
     'user',
     'book',
-
 ]
 
 MIDDLEWARE = [

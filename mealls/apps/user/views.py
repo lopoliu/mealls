@@ -5,9 +5,9 @@ from django_redis import get_redis_connection
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import User
+from user.models import User
 from mealls.settings.dev import SECRET_KEY
-from .serializers import RegisterSerializer, LoginSerializer
+from user.serializers import RegisterSerializer, LoginSerializer
 
 redis_conn = get_redis_connection()
 

@@ -1,0 +1,11 @@
+{
+    "python.autoComplete.extraPaths": [
+    "python.inte",
+    ],
+    "python.analysis.autoSearchPaths": true,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "python.analysis.extraPaths": [
+        "python.inte",
+        "./mealls/"
+    ]
+}
