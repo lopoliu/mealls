@@ -2,6 +2,7 @@ import os, sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR))
 
 SECRET_KEY = 'd4dp8eg8@9i_g&d=(rdv)flr3(_d_zekegan7n4iyyw^8!5asn'
 
@@ -32,8 +33,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mealls.root_urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -50,6 +49,8 @@ TEMPLATES = [
         },
     },
 ]
+
+ROOT_URLCONF = 'mealls.root_urls'
 
 WSGI_APPLICATION = 'mealls.wsgi.application'
 ASGI_APPLICATION = 'mealls.asgi.application'
@@ -112,11 +113,9 @@ REST_FRAMEWORK = {
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {"hosts": ["redis://127.0.0.1:6379/2"], },
+        'CONFIG': {"hosts": ["redis://127.0.0.1:6379/1"], },
     },
 }
-
-
 
 # 邮箱配置
 EMAIL_USE_SSL = True

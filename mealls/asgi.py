@@ -1,14 +1,22 @@
 import os
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mealls.settings.dev')
-django.setup()
 
-from django.core.wsgi import get_wsgi_application
+from channels.auth import AuthMiddlewareStack
+
+from channels.http import AsgiHandler
 from channels.routing import ProtocolTypeRouter, URLRouter
-from . import routing
+from django.urls import re_path
 
+from apps.consumers.consumer import ChatConsumer
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mealls.settings.dev')
+
+websocket_urlpatterns = [
+    re_path(r"room/(?P<group>\w+)/$", ChatConsumer.as_asgi()),
+]
 
 application = ProtocolTypeRouter({
-    # 'http': get_wsgi_application(),
-    'websocket': URLRouter(routing.websocket_urlpatterns),
+    "http": AsgiHandler(),
+    "websocket": AuthMiddlewareStack(
+        URLRouter(websocket_urlpatterns)
+    ),
 })
