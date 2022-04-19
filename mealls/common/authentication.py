@@ -1,6 +1,5 @@
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
-from user.models import User
 from django.conf import settings
 import jwt
 from jwt import exceptions

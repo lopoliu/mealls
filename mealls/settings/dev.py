@@ -8,7 +8,7 @@ SECRET_KEY = 'd4dp8eg8@9i_g&d=(rdv)flr3(_d_zekegan7n4iyyw^8!5asn'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -81,18 +81,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-STATIC_URL = '/static/'
-
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -107,20 +95,40 @@ CACHES = {
 }
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ["mealls.components.authentication.LoginAuth"],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["mealls.common.authentication.LoginAuth"],
 }
 
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {"hosts": ["redis://127.0.0.1:6379/1"], },
+        'CONFIG': {
+            "hosts": ["redis://127.0.0.1:6379/0"]
+        },
     },
 }
 
 # 邮箱配置
 EMAIL_USE_SSL = True
+
 EMAIL_HOST = 'smtp.qq.com'
+
 EMAIL_PORT = 465
+
 EMAIL_HOST_USER = '982781738@qq.com'  # 帐号
+
 EMAIL_HOST_PASSWORD = 'ylzgjnkvpwaibbcc'  # 密码
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# 时区国际化配置
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+STATIC_URL = '/static/'

@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from mealls.components.code import SendEmailCode
+from mealls.common.code import SendEmailCode
 
 urlpatterns = [
     path('admin/', admin.site.urls),

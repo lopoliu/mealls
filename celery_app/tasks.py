@@ -11,8 +11,8 @@ from celery_app.main import c_app
 
 
 @c_app.task
-def send_email(email, code):
+def send_email(receive_address, code):
     """发送验证码邮件"""
     templates = "欢迎您使用mealls, 你的验证码为 %s , 请勿将验证码告知他人." % code
-    sm("Mealls团队", templates, '982781738@qq.com', [email, ])
+    sm("Mealls团队", templates, '982781738@qq.com', [receive_address, ])
     return code
