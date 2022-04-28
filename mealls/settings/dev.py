@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -36,8 +37,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates']
-        ,
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,6 +95,7 @@ CACHES = {
 }
 
 REST_FRAMEWORK = {
+    # 全局认证
     "DEFAULT_AUTHENTICATION_CLASSES": ["mealls.common.authentication.LoginAuth"],
 }
 
@@ -121,14 +122,14 @@ EMAIL_HOST_PASSWORD = 'ylzgjnkvpwaibbcc'  # 密码
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # 时区国际化配置
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 STATIC_URL = '/static/'

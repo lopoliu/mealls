@@ -1,8 +1,10 @@
 from django.db import models
-import hashlib
+from mealls.common.base_model import BaseModel
+from mealls.common.tools import to_md5
 
 
-class User(models.Model):
+class User(BaseModel):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
     email = models.EmailField()
     password = models.CharField(max_length=256)
@@ -11,11 +13,8 @@ class User(models.Model):
         db_table = 'tb_user'
 
     def __str__(self):
-        return self.name
-
-    def set_password(self, password):
-        self.password = hashlib.md5(password.encode(encoding='UTF-8')).hexdigest()
+        return self.name + " | " + self.email
 
     def check_password(self, password):
-        if self.password == hashlib.md5(password.encode(encoding='UTF-8')).hexdigest():
+        if self.password == to_md5(password):
             return True
