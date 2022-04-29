@@ -9,6 +9,7 @@ class CodeThrottling(BaseThrottle):
     def __init__(self):
         self.ident = None
         self.history = []
+        self.INTERVAL = 60
 
     def get_ident(self, request):
         request_ident = request.GET["email"]
@@ -23,7 +24,7 @@ class CodeThrottling(BaseThrottle):
             return True
 
         self.history = VISIT_RECORD[self.ident]
-        if time.time() - self.history[-1] > 10:
+        if time.time() - self.history[-1] > self.INTERVAL:
             self.history.append(time.time())
             if len(self.history) > 3:
                 self.history.pop(1)
@@ -31,4 +32,4 @@ class CodeThrottling(BaseThrottle):
             return True
 
     def wait(self):
-        return self.history[-1] + 10 - time.time()
+        return self.history[-1] + self.INTERVAL - time.time()

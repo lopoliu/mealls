@@ -7,10 +7,12 @@ from rest_framework.views import APIView
 from .models import User
 from mealls.settings.dev import SECRET_KEY
 from .serializers import RegisterSerializer, PasswordSerializer, LoginReSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class Register(APIView):
     authentication_classes = []
+    permission_classes = []
 
     def post(self, request):
         ser = RegisterSerializer(data=request.data)
@@ -21,6 +23,7 @@ class Register(APIView):
 
 class Login(APIView):
     authentication_classes = []
+    permission_classes = []
     result = {"code": "200", "message": "success", "data": None}
     HEADERS = {'typ': 'jwt', 'alg': 'HS256'}
     ALGORITHM = 'HS256'

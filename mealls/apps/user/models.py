@@ -8,6 +8,8 @@ class User(BaseModel):
     name = models.CharField(max_length=128)
     email = models.EmailField()
     password = models.CharField(max_length=256)
+    type = models.IntegerField(default=1)
+    address = models.CharField(max_length=256, default=None, blank=True, null=True)
 
     class Meta:
         db_table = 'tb_user'
